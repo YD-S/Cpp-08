@@ -11,7 +11,7 @@
 #include <stack>
 #include <exception>
 
-class easyfind: public std::exception
+class error: public std::exception
 {
 	public:
 		virtual const char* what() const throw(){
@@ -20,11 +20,12 @@ class easyfind: public std::exception
 };
 
 template <typename T>
-int easyfind(T &container, int n){
+typename T::iterator easyfind(T &container, int n){
 	typename T::iterator i;
 	i = std::find(container.begin(), container.end(), n);
 	if (i == container.end())
-		throw std::exception();
-	return (*i);
+		throw error();
+	else
+		return (i);
 }
 #endif
